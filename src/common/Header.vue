@@ -11,17 +11,26 @@ export default {
         pageId:String
     },
     data(){
+        return{
+
+        }
     }
 };
 </script>
 
 <style scoped>
 .page-haeder{
-    height: 100%;
-    height: 0.54rem;
+    width: 100%;
+    height: 0.42rem;
     position: absolute;
     top: 0;
     left: 0;
     background-image: linear-gradient(90deg,#0af,#0085ff);
+    color: white;
+    line-height: 0.42rem;
+    text-align: center;
+    font-size: 0.16rem;
+    font-weight: 800;
+    z-index: 1;
 }
 </style>

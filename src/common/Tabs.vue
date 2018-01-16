@@ -35,4 +35,7 @@ export default {
   text-align: center;
   line-height:49px;
 }
+.router-link-active{
+    color: #0c8edd;
+}
 </style>

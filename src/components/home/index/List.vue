@@ -14,7 +14,7 @@ export default {
 
 .seller-list{
     width: 100%;
-    height: 10rem;
+    min-height: 6rem;
     background: white;
 }
 </style>

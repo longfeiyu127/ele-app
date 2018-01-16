@@ -10,13 +10,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
 .banner{
     width: 100%;
-    height: 2.8rem;
+    height: 2.67rem;
     background: white;
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.07rem;
     background: blue
 }
 </style>

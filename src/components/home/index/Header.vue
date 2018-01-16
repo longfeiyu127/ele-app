@@ -14,7 +14,7 @@ export default {
 
 .header{
     width: 100%;
-    height: 1.32rem;
+    height: 0.92rem;
     background-image: linear-gradient(90deg,#0af,#0085ff);
     color: #fff;
 }
