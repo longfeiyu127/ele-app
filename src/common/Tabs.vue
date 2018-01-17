@@ -29,6 +29,7 @@ export default {
   display: flex;
   position: absolute;
   bottom: 0;
+  background: white;
 }
 .tab{
   flex: 1;

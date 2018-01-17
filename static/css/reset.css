@@ -7,7 +7,7 @@ h1,h2,h3,h4,h5,h6,strong,b{
 }
 i,em{font-style:normal;}
 li{list-style:none;}
-img{border:0;}
+img{border:0;display: block;}
 a{text-decoration:none; color:#333;}
 input{outline:none;}
 .clearfix:after{content:'.';display:block;height:0;overflow:hidden;visibility:hidden; clear:both;}
@@ -40,6 +40,36 @@ input{outline:none;}
   height: 1px;
   border-bottom: 1px solid #c5c5c5;
   transform: scaleY(0.5);
+}
+.one-border-left{
+  height: 100%;
+  position: relative;
+}
+.one-border-left:before{
+  content: '';
+  position: absolute;
+  display: block;
+  top: 0;
+  left: -1px;
+  width: 1px;
+  height: 100%;
+  border-left: 1px solid #c5c5c5;
+  transform: scaleX(0.5);
+}
+.one-border-right{
+  height: 100%;
+  position: relative;
+}
+.one-border-right:after{
+  content: '';
+  position: absolute;
+  display: block;
+  top: 0;
+  right: -1px;
+  width: 1px;
+  height: 100%;
+  border-right: 1px solid #c5c5c5;
+  transform: scaleX(0.5);
 }
 
 
