@@ -5,7 +5,7 @@
             <a href="" class="address">地址</a>
         </div>
       </div>
-      <home-search></home-search>
+      <home-search class="search"></home-search>
   </header>
 </template>
 

@@ -29,7 +29,7 @@
                 </div> 
             </li>
         </ul>
-        <div class="load-more one-border-top">没有更多了哦~</div>
+        <div class="load-more one-border-top"><img src="../../../../static/images/ajax-loader.gif" class="load-more-gif">正在加载更多</div>
     </div>
 </template>
 
@@ -39,23 +39,49 @@ export default {
     name:'home-list',
     data(){
         return{
-            sellerData:[]
+            sellerData:[],
+            limit:12,
         }
     },
     methods:{
         Show(index){
             this.sellerData[index].isShow=!this.sellerData[index].isShow;
             this.$nextTick(()=>{
-                //告诉父组件 更新页面
                 this.$emit('activities-show');
             })
+        },
+        requireData(callback){
+            //准备数据
+            getSeller(22.54286, 114.059563, this.offset, this.limit).then(data=>{
+                console.log(data)
+                this.sellerData=this.sellerData.concat(data)
+                this.$nextTick(()=>{
+                    if(data.length){
+                        console.log('加载完了')
+                        this.$emit('getMore-end')
+                        if(callback){
+                            callback()
+                        }
+                    }else{
+                        //没有更多加载
+                    }
+                })
+            })
+
         }
     },
-    mounted () {
-        //准备数据
-        getSeller().then(data=>{
-            console.log(data)
-            this.sellerData=this.sellerData.concat(data)
+    computed:{
+        offset(){
+            return this.sellerData.length
+        }
+    },
+    mounted () { 
+        //首次加载
+        this.requireData()
+        //监听加载更多
+        this.$center.$on('get-more',()=>{
+            console.log('需要加载更多')
+            this.requireData()
         })
     }
 };
@@ -262,5 +288,13 @@ export default {
     text-align: center;
     font-size: 0.11rem;
     line-height: 0.38rem;
+}
+.load-more-gif{
+    height: 0.15rem;
+    width: 0.15rem;
+    margin-right: 0.06rem;
+    display: inline-block;
+    line-height: 0.38rem;
+    vertical-align: middle;
 }
 </style>

@@ -16,6 +16,8 @@ export default {
     padding: 0.07rem 0.13rem 0.08rem;
     text-align: center;
     background-image: linear-gradient(90deg,#0af,#0085ff);
+    position: relative;
+    z-index: 5;
 }
 .search span{
     display: block;

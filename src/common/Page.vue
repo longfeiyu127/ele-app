@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Iscroll from 'iscroll'
+import Iscroll from 'iscroll/build/iscroll-probe'
 export default {
     name:'page',
     props:{
@@ -15,7 +15,7 @@ export default {
     },
     data(){
         return{
-            
+          isGetMore:true,  
         }
     },
     methods:{
@@ -26,9 +26,24 @@ export default {
     mounted () {
         this.MyScroll =new Iscroll(this.$refs.page,{
             // scrollbars: true,
-            // tap: true
-        })
-        this.MyScroll.on('scrollStart', this.pageRefresh)
+            probeType: 3
+        });
+        this.MyScroll.on('scrollStart', this.pageRefresh);
+
+
+        this.MyScroll.on('scroll', ()=>{
+            let y=this.MyScroll.y
+            let maxScrollY = this.MyScroll.maxScrollY;
+            //传输给主页面滚动Y值 
+            this.$emit('page-scroll',y)
+            if(y>0){
+                 this.MyScroll.scrollTo(0, 0);
+            }else if(y<maxScrollY+42 && this.isGetMore){
+                //需要加载更多
+                this.isGetMore=!this.isGetMore;
+                this.$center.$emit('get-more');
+            }
+        });
     }
 };
 </script>

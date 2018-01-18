@@ -27,14 +27,14 @@ export function getBanner(lat,lon,tmp){
 }
 
 //请求商家列表
-export function getSeller(){
+export function getSeller(latitude,longitude,offset,limit){
     return new Promise((resolve,reject)=>{
         axios.get(Api.SELLER_URL,{
             params:{
-                latitude:22.54286,
-                longitude:114.059563,
-                offset:8,
-                limit:8,
+                latitude,
+                longitude,
+                offset,
+                limit,
                 extras:['activities','tags'],
                 extra_filters:'home',
                 rank_id:'984553df2830414c9058eaff4b63bbaa',
