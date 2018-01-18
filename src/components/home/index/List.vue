@@ -2,57 +2,62 @@
     <div id="seller-list">
         <h3 class="title">推荐商家</h3>
         <ul class="seller-list clearfix">
-            <li class="seller one-border-bottom">
-                <img src="" alt="" class="sellerImg">
+            <li class="seller one-border-bottom" v-for="(seller,index)  in sellerData" :key="index">    
+                <img :src="seller.img" alt="" class="sellerImg">
                 <div class="sellerInfo">
                     <div class="sellerInfo-main one-border-bottom">
-                        <h4 class="sellerTitle">店名</h4>
-                        <div class="grade">评分</div>
-                        <div class="serve">配送</div>
+                        <h4 class="sellerTitle"><span><i class="premium" v-if="seller.premium">品牌</i>{{seller.name}}</span><span class="invoice" v-if="seller.supports.length">票</span></h4>
+                        <div class="grade">
+                            <div class="evaluate"><div class="star star-top"><div class="star-bottom-box"  :style="{width:seller.rating*20+'%'}"><i class="star-bottom"></i></div></div>{{seller.rating}} 月售{{seller.orderNum}}单</div>
+                            <div class="hummingbird" v-if="seller.deliveryMode">蜂鸟专送</div>
+                        </div>
+                        <div class="serve">
+                            <p class="serve-price"><em>￥{{seller.minimumOrderAmount}}起送</em><em class="one-border-left">配送费￥{{seller.deliveryFee}}</em></p>
+                            <p class="serve-time"><em>{{seller.distance | distance}}</em><em class="one-border-left">{{seller.leadTime}}分钟</em></p>
+                        </div>
                         <div class="good-seller">口碑好店</div>
                     </div>
                     <div class="activity clearfix">
-                        <div class="activity-add">更多</div>
-                        <dl class="activity-main">
-                            <dt class="activity-icon">图</dt>
-                            <dd class="activity-title">活动</dd>
-                        </dl>
-                        <dl class="activity-main">
-                            <dt class="activity-icon">图</dt>
-                            <dd class="activity-title">活动</dd>
-                        </dl>
-                    </div>
-                </div> 
-            </li>
-            <li class="seller one-border-bottom">
-                <img src="" alt="" class="sellerImg">
-                <div class="sellerInfo">
-                    <div class="sellerInfo-main one-border-bottom">
-                        <h4 class="sellerTitle">店名</h4>
-                        <div class="grade">评分</div>
-                        <div class="serve">配送</div>
-                        <div class="good-seller">口碑好店</div>
-                    </div>
-                    <div class="activity clearfix">
-                        <div class="activity-add">更多</div>
-                        <dl class="activity-main">
-                            <dt class="activity-icon">图</dt>
-                            <dd class="activity-title">活动</dd>
-                        </dl>
-                        <dl class="activity-main">
-                            <dt class="activity-icon">图</dt>
-                            <dd class="activity-title">活动</dd>
-                        </dl>
+                        <div>
+                            <dl class="activity-main" v-for="(activities,j) in seller.activities" :key="j" v-if="j<2 || seller.isShow">
+                                <dt class="activity-icon" :style="{background: '#'+activities.icon_color}">{{activities.icon_name}}</dt>
+                                <dd class="activity-title">{{activities.description}}</dd>
+                            </dl>
+                        </div>
+                        <div class="activity-add" @click="Show(index)" v-if="seller.activities.length>2">{{seller.activities.length}}个活动<i class="iconfont">&#xe600;</i></div>
                     </div>
                 </div> 
             </li>
         </ul>
+        <div class="load-more one-border-top">没有更多了哦~</div>
     </div>
 </template>
 
 <script>
+import {getSeller} from '../../../service/HomeService.js'
 export default {
-    name:'home-list'
+    name:'home-list',
+    data(){
+        return{
+            sellerData:[]
+        }
+    },
+    methods:{
+        Show(index){
+            this.sellerData[index].isShow=!this.sellerData[index].isShow;
+            this.$nextTick(()=>{
+                //告诉父组件 更新页面
+                this.$emit('activities-show');
+            })
+        }
+    },
+    mounted () {
+        //准备数据
+        getSeller().then(data=>{
+            console.log(data)
+            this.sellerData=this.sellerData.concat(data)
+        })
+    }
 };
 </script>
 
@@ -109,26 +114,98 @@ export default {
 .sellerInfo-main::after{
     border-bottom: 1px dotted #c5c5c5;
 }
+.premium{
+    display: inline-block;
+    width: 0.25rem;
+    height: 0.16rem;
+    background: #ffeb17;
+    border-radius: 0.01rem;
+    font-size: 0.1rem;
+    line-height: 0.16rem;
+    text-align: center;
+    color: #6f3f15;
+    vertical-align: middle;
+    margin-right: 0.07rem;
+}
 .sellerTitle{
     height: 0.16rem;
     line-height: 0.16rem;
-    margin: 0.18rem 0 0.11rem;
+    margin: 0.18rem 0 0.10rem;
     font-size: 0.14rem;
     color: #000;
     font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+}
+.invoice{
+    display: block;
+    width: 0.12rem;
+    height: 0.12rem;
+    line-height: 0.12rem;
+    text-align: center;
+    color: #999999;
+    font-size: 0.08rem;
+    font-weight: 400;
+    border: 1px solid #dddddd;
 }
 .grade{
-    height: 0.1rem;
-    line-height: 0.1rem;
+    height: 0.12rem;
+    line-height: 0.12rem;
     color: #666666;
     font-size: 0.09rem;
+    display: flex;
+    justify-content: space-between;
+}
+.evaluate{
+    position: relative;
+}
+.star{
+    display: inline-block;
+    height: 0.095rem;
+    width: 0.52rem;
+    margin-right: 0.05rem;
+    position: relative;
+    background: url(../../../../static/images/star.png) no-repeat 0 0;
+    background-size: 100%;
+}
+.star-bottom-box{
+    height: 100%;
+    overflow: hidden;
+}
+.star-bottom-box .star-bottom{
+    display: block;
+    background: url(../../../../static/images/star.png) no-repeat 0 100%;
+    background-size: 100%;
+    width: 0.52rem;
+    height: 0.095rem;
+}
+.hummingbird{
+    display: inline-block;
+    height: 0.16rem;
+    line-height: 0.16rem;
+    vertical-align: middle;
+    background: #009aff;
+    border-radius: 0.02rem;
+    padding: 0 0.03rem;
+    font-size: 0.09rem;
+    color: white;
+    text-align: center;
 }
 .serve{
     font-size: 0.09rem;
     height: 0.09rem;
     line-height: 0.09rem;
-    margin-top: 0.13rem;
+    margin-top: 0.12rem;
     color: #666666;
+    display: flex;
+    justify-content: space-between;
+}
+.serve-price em:nth-child(2),.serve-time em:nth-child(2){
+    margin-left: 0.04rem;
+    padding-left: 0.04rem;
+}
+.serve-time{
+    color: #999999;
 }
 .good-seller{
     font-size: 0.09rem;
@@ -140,23 +217,50 @@ export default {
 .activity{
     padding: 0.09rem 0 0.14rem;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 .activity-add{
-    float: right;
+    height: 0.38rem;
+    color: #999999;
+    font-size: 0.09rem;
+}
+.activity-add i{
+    font-size: 0.09rem;
+    display: inline-block;
+    margin-left: 0.05rem;
 }
 .activity-main{
-    width: 2.23rem;
+    width: 2.1rem;
     height: 0.19rem;
     line-height: 0.19rem;
-    float: left;
 }
 .activity-icon{
     float: left;
     width: 0.13rem;
-    height: 100%;
+    height: 0.13rem;
+    margin-top: 0.03rem;
+    line-height: 0.13rem;
+    font-size: 0.09rem;
+    text-align: center;
+    color: white;
+    vertical-align: middle;
     margin-right: 0.06rem;
+    border-radius: 0.02rem;
+    background: #c5c5c5;
 }
 .activity-title{
     float: left;
+    width: 1.91rem;
+    font-size: 0.1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.load-more{
+    height: 0.38rem;
+    text-align: center;
+    font-size: 0.11rem;
+    line-height: 0.38rem;
 }
 </style>

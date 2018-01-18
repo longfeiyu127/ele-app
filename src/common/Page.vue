@@ -15,7 +15,12 @@ export default {
     },
     data(){
         return{
-            MyScroll:{}
+            
+        }
+    },
+    methods:{
+        pageRefresh(){
+            this.MyScroll.refresh();
         }
     },
     mounted () {
@@ -23,6 +28,7 @@ export default {
             // scrollbars: true,
             // tap: true
         })
+        this.MyScroll.on('scrollStart', this.pageRefresh)
     }
 };
 </script>

@@ -10,7 +10,7 @@
                     </a>
                 </swiper-slide>
                 <!-- Optional controls -->
-                <div class="swiper-pagination"  slot="pagination"></div>
+                <div class="swiper-pagination"  slot="pagination" v-show="bannerData.length>1"></div>
             </swiper>
         </div>
         <div class="banner-newUser">
@@ -51,7 +51,6 @@ export default {
                 'svip_template'
         ];
         getBanner(lat,lon,tmp).then(data=>{
-            console.log(data);
             this.bannerData=data;
         })     
     },

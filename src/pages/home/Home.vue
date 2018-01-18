@@ -1,8 +1,8 @@
 <template>
-    <page id="home">
+    <page id="home" ref="page">
         <home-header></home-header>
         <home-banner></home-banner>
-        <home-list></home-list>
+        <home-list @activities-show='refresh'></home-list>
     </page>
 </template>
 
@@ -19,6 +19,11 @@ export default {
         [Header.name]:Header,
         [Banner.name]:Banner,
         [List.name]:List,
+    },
+    methods:{
+        refresh(){
+            this.$refs.page.pageRefresh()
+        }
     }
 }
 </script>
