@@ -15,13 +15,16 @@ export default {
     },
     data(){
         return{
-          isGetMore:true,  
+          isGetMore:false,  
         }
     },
     methods:{
         pageRefresh(){
             this.MyScroll.refresh();
-        }
+        },
+        getDataEnd(){
+            this.isGetMore=true;
+        }     
     },
     mounted () {
         this.MyScroll =new Iscroll(this.$refs.page,{

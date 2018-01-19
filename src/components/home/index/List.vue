@@ -2,7 +2,7 @@
     <div id="seller-list">
         <h3 class="title">推荐商家</h3>
         <ul class="seller-list clearfix">
-            <li class="seller one-border-bottom" v-for="(seller,index)  in sellerData" :key="index">    
+            <li class="seller one-border-bottom" v-for="(seller,index)  in sellerData" :key="index" @click="goDetail()"> 
                 <img :src="seller.img" alt="" class="sellerImg">
                 <div class="sellerInfo">
                     <div class="sellerInfo-main one-border-bottom">
@@ -29,7 +29,7 @@
                 </div> 
             </li>
         </ul>
-        <div class="load-more one-border-top"><img src="../../../../static/images/ajax-loader.gif" class="load-more-gif">正在加载更多</div>
+        <div class="load-more one-border-top" ref="loadMore"><img src="../../../../static/images/ajax-loader.gif" class="load-more-gif">正在加载更多</div>
     </div>
 </template>
 
@@ -53,21 +53,21 @@ export default {
         requireData(callback){
             //准备数据
             getSeller(22.54286, 114.059563, this.offset, this.limit).then(data=>{
-                console.log(data)
                 this.sellerData=this.sellerData.concat(data)
                 this.$nextTick(()=>{
                     if(data.length){
-                        console.log('加载完了')
                         this.$emit('getMore-end')
-                        if(callback){
-                            callback()
-                        }
                     }else{
                         //没有更多加载
+                        this.$refs.loadMore.innerHTML='没有更多了哦~'
                     }
                 })
             })
-
+        },
+        //进入详情页面
+        goDetail(){
+            console.log(this.$router);
+            this.$router.push({ path: '/home/detail'})
         }
     },
     computed:{

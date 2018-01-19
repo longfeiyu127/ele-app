@@ -6,6 +6,9 @@
             <home-list @activities-show='refresh' @getMore-end='handlegetMoreEnd'></home-list>
         </page>
         <home-search class="search" v-show="showSearch"></home-search>
+
+        <!-- 装载子页面 -->
+        <router-view></router-view>
     </div>
 </template>
 
@@ -16,6 +19,7 @@ import Header from '../../components/home/index/Header'
 import Banner from '../../components/home/index/Banner'
 import List from '../../components/home/index/List'
 import Search from '../../components/home/index/Search'
+
 export default {
     components:{
         [Page.name]:Page,
@@ -42,8 +46,8 @@ export default {
             }
         },
         handlegetMoreEnd(){
-            console.log('需要告诉page,已经加载完毕了')
-            
+            //加载完毕
+            this.$refs.page.getDataEnd()
         }
     }
 }

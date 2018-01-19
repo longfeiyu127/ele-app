@@ -18,11 +18,19 @@ export default {
             MyScroll:{}
         }
     },
+    methods:{
+        pageRefresh(){
+            this.MyScroll.refresh();
+        },
+    },
     mounted () {
         this.MyScroll =new Iscroll(this.$refs.page,{
             // scrollbars: true,
             // tap: true
         })
+
+         this.MyScroll.on('scrollStart', this.pageRefresh);
+
     }
 };
 </script>

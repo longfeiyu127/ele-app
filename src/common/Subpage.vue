@@ -11,12 +11,14 @@ export default {
 </script>
 
 <style scoped>
-.subpage {
+.sub-page {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     width: 100%;
-    z-index: 1;
+    height: 100%;
+    z-index: 6;
+    background: white;
 }
 </style>
