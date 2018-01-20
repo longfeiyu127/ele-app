@@ -12,7 +12,11 @@ import Tabs from './common/Tabs.vue'
 export default {
   components:{
     [Tabs.name]:Tabs
-  }
+  },
+  mounted () {
+    //触发定位
+    this.$store.dispatch('getLocationActive')
+  },
 }
 </script>
 

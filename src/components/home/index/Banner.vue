@@ -20,6 +20,9 @@
 </template>
 
 <script>
+
+import Vuex from 'vuex'
+
 import {getBanner} from '../../../service/HomeService.js'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
@@ -38,21 +41,32 @@ export default {
                     el:'.swiper-pagination',
                 } ,
                 autoHeight: true,
-            }
+            },
+            tmp:['main_template','favourable_template','svip_template']
+        }
+    },
+    computed: {
+        ...Vuex.mapState({
+            lon:'longitude',
+            lat:'latitude'
+        }),
+    },
+    watch:{
+        lon:'getBannerData',
+        lat:'getBannerData'
+    },
+    methods: {
+        getBannerData(){
+            //发送banner数据请求
+            if(this.lon&&this.lat){
+                getBanner(this.lat,this.lon,this.tmp).then(data=>{
+                    this.bannerData=data;
+                })  
+            }  
         }
     },
     mounted () {
-        //发送banner数据请求
-        let lat='22.54286';
-        let lon='114.059563';
-        let tmp=[
-                'main_template',
-                'favourable_template',
-                'svip_template'
-        ];
-        getBanner(lat,lon,tmp).then(data=>{
-            this.bannerData=data;
-        })     
+        this. getBannerData()       
     },
 };
 </script>

@@ -8,7 +8,10 @@ https://h5.ele.me
 推荐商家列表
 https://h5.ele.me
 /restapi/shopping/v3/restaurant
-?latitude=22.54286&longitude=114.059563&offset=8&limit=8&extras[]=activities&extras[]=tags&extra_filters=home&rank_id=984553df2830414c9058eaff4b63bbaa&terminal=h5
+?latitude=22.54286&longitude=114.059563&offset=8&limit=8
+&extras[]=activities&extras[]=tags&extra_filters=home
+&rank_id=984553df2830414c9058eaff4b63bbaa
+&terminal=h5
 
 
 地址请求
@@ -47,7 +50,17 @@ https://h5.ele.me
 &rank_id=984553df2830414c9058eaff4b63bbaa
 &terminal=h5
 
-
+店铺信息
+https://h5.ele.me
+/restapi/shopping/restaurant/150107564
+?extras[]=activities
+&extras[]=albums
+&extras[]=license
+&extras[]=identification
+&extras[]=qualification
+&terminal=h5
+&latitude=31.23037
+&longitude=121.473701
 
 
 发现
@@ -62,6 +75,8 @@ https://h5.ele.me
 限时豪礼
 https://h5.ele.me
 /restapi/member/gifts/suggest
+
+
 
 为你推荐
 https://h5.ele.me

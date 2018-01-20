@@ -16,6 +16,9 @@
 </template>
 
 <script>
+
+import Vuex from 'vuex'
+
 import Page from '../../common/Page'
 import Header from  '../../common/Header'
 import Boon from '../../components/discover/index/Boon'
@@ -41,16 +44,33 @@ export default {
             RecommendData:[],
         }
     },
+    computed: {
+        ...Vuex.mapState({
+            lon:'longitude',
+            lat:'latitude'
+        }),
+    },
+    methods:{
+        getRecommend(){
+            //请求为你推荐数据
+            if(this.lat && this.lon){
+                getRecommendData(this.lat,this.lon,0,6).then(data=>{
+                    this.RecommendData=data
+                })
+            }      
+        }
+    },
+    watch:{
+        lon:'getRecommend',
+        lat:'getRecommend',
+    },
     mounted () {
        //请求限时豪礼数据
         getSuggestData().then(data=>{
             this.SuggestData=data
-        }) 
-        //请求为你推荐数据
-        getRecommendData(22.54286,114.059563,0,6).then(data=>{
-            console.log(data)
-            this.RecommendData=data
-        })
+        })   
+        //请求为你推荐
+        this.getRecommend();
     },
 }
 </script>

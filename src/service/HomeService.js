@@ -27,7 +27,7 @@ export function getBanner(lat,lon,tmp){
 }
 
 //请求商家列表
-export function getSeller(latitude,longitude,offset,limit){
+export function getSeller(latitude,longitude,offset,limit,rank_id){
     return new Promise((resolve,reject)=>{
         axios.get(Api.SELLER_URL,{
             params:{
@@ -37,7 +37,7 @@ export function getSeller(latitude,longitude,offset,limit){
                 limit,
                 extras:['activities','tags'],
                 extra_filters:'home',
-                rank_id:'984553df2830414c9058eaff4b63bbaa',
+                rank_id,
                 terminal:'h5',
             }
         }).then(result=>{
@@ -66,6 +66,7 @@ export function getSeller(latitude,longitude,offset,limit){
                     activities,         //活动
                     address:item.restaurant.address,    //地址
                     isShow:false,
+                    id:item.restaurant.id
                 }
             })
             resolve(newData)
@@ -73,4 +74,25 @@ export function getSeller(latitude,longitude,offset,limit){
     })
 }
 
-
+//请求商家详情
+export function getSellerInfo(latitude,longitude,extras){
+    return new Promise((resolve, reject)=>{
+        axios.get(Api.SELLER_INFO_URL,{
+            params: {
+                extras,
+                terminal:'h5',
+                latitude,
+                longitude,
+            }
+        }).then((result)=>{
+            console.log(result)
+            // let newData=result.data[0].entries.map(item=>{
+            //     return {
+            //         name:item.name,
+            //         img:handleImage(item.image_hash,90) 
+            //     }
+            // })
+            //resolve(resultData)
+        })
+    })
+}

@@ -2,7 +2,7 @@
     <div id="seller-list">
         <h3 class="title">推荐商家</h3>
         <ul class="seller-list clearfix">
-            <li class="seller one-border-bottom" v-for="(seller,index)  in sellerData" :key="index" @click="goDetail()"> 
+            <li class="seller one-border-bottom" v-for="(seller,index)  in sellerData" :key="index" @click="goDetail(index)"> 
                 <img :src="seller.img" alt="" class="sellerImg">
                 <div class="sellerInfo">
                     <div class="sellerInfo-main one-border-bottom">
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import Vuex from 'vuex'
 import {getSeller} from '../../../service/HomeService.js'
 export default {
     name:'home-list',
@@ -41,6 +42,7 @@ export default {
         return{
             sellerData:[],
             limit:12,
+            flag:true,
         }
     },
     methods:{
@@ -50,30 +52,51 @@ export default {
                 this.$emit('activities-show');
             })
         },
-        requireData(callback){
-            //准备数据
-            getSeller(22.54286, 114.059563, this.offset, this.limit).then(data=>{
-                this.sellerData=this.sellerData.concat(data)
-                this.$nextTick(()=>{
-                    if(data.length){
-                        this.$emit('getMore-end')
-                    }else{
-                        //没有更多加载
-                        this.$refs.loadMore.innerHTML='没有更多了哦~'
-                    }
+        requireData(){
+            //准备数据       
+            if(this.lon && this.lat){
+                getSeller(this.lat, this.lon, this.offset, this.limit,this.rank_id).then(data=>{
+                    this.sellerData=this.sellerData.concat(data)
+                    this.flag=true;
+                    this.$nextTick(()=>{
+                        if(data.length){
+                            this.$emit('getMore-end')
+                        }else{
+                            //没有更多加载
+                            this.$refs.loadMore.innerHTML='没有更多了哦~'
+                        }
+                    })
                 })
-            })
+            }
         },
         //进入详情页面
-        goDetail(){
-            console.log(this.$router);
-            this.$router.push({ path: '/home/detail'})
+        goDetail(index){
+            this.$router.push({ path: '/home/detail',query: { id: this.sellerData[index].id }})
         }
     },
-    computed:{
+    computed: {
+        ...Vuex.mapState({
+            lon:'longitude',
+            lat:'latitude',
+            rank_id:'rank_id'
+        }),
         offset(){
             return this.sellerData.length
         }
+    },
+    watch:{
+        lon(){
+            if(this.flag){
+                this.flag=false;
+                this.requireData();
+            }      
+        },
+        lat(){
+            if(this.flag){
+                this.flag=false;
+                this.requireData();
+            }    
+        },
     },
     mounted () { 
         //首次加载
@@ -83,7 +106,7 @@ export default {
             console.log('需要加载更多')
             this.requireData()
         })
-    }
+    },
 };
 </script>
 

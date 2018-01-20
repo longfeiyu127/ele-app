@@ -58,6 +58,21 @@ https://h5.ele.me
 */
 const RECOMMEND_URL = '/restapi/shopping/v1/find/recommendation';
 
+/*
+店铺信息
+https://h5.ele.me
+/restapi/shopping/restaurant/150107564
+?extras[]=activities
+&extras[]=albums
+&extras[]=license
+&extras[]=identification
+&extras[]=qualification
+&terminal=h5
+&latitude=31.23037
+&longitude=121.473701
+*/
+const SELLER_INFO_URL = '/restapi/shopping/restaurant';
+
 
 export default {
     BANNER_URL,
@@ -66,5 +81,6 @@ export default {
     BOON_URL,
     SUGGEST_URL,
     RECOMMEND_URL,
+    SELLER_INFO_URL,
 }
 

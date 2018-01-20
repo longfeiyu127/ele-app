@@ -1,19 +1,57 @@
 <template>
-  <header class="detail-header-wrap">    
-      <div class="header-img"><img src="" alt="" class="header-banner"></div>    
-      <h3 class="title">永和豆浆大王 <i class="iconfont">&#xe600;</i></h3>
-      <div class="seller-info"><span>月售960单</span></div>
-      <p class="service">客服电话</p>
-      <div class="active"><div><span><i class="active-icon">首单</i>新用户下单</span><em>3个活动<i class="iconfont more">&#xe600;</i></em></div></div>
-  </header>
+    <header class="detail-header-wrap">    
+        <div class="header-img"><img :src="sellerInfo.image_path" alt="" class="header-banner"></div>    
+        <h3 class="seller-title">{{sellerInfo.name}}<i class="iconfont">&#xe600;</i></h3>
+        <div class="seller-info">
+            <span>{{sellerInfo.rating}}</span>
+            <span>月售{{sellerInfo.recent_order_num}}单</span>
+            <span>{{sellerInfo.delivery_mode}}</span>
+            <span>约{{sellerInfo.order_lead_time}}分钟</span>
+            <span>距离{{sellerInfo.distance | distance}}</span>
+        </div>
+        <p class="service">{{sellerInfo.phone}}</p>
+        <div class="active clearfix">
+            <div v-if="sellerInfo.activities">
+                <span><i class="active-icon" :style="{background: '#'+sellerInfo.activities[0].icon_color}">{{sellerInfo.activities[0].icon_name}}</i>{{sellerInfo.activities[0].description}}</span>
+                <em>{{sellerInfo.activities.length}}个活动<i class="iconfont more">&#xe600;</i></em>
+            </div>
+        </div>
+        <div class="red-packet"><span class="red-packet-active"><em>共<i>10</i>元专享红包</em><i>领取</i></span></div>
+    </header>
 </template>
 
 <script>
+import Vuex from 'vuex'
+import {getSellerInfo} from '../../../service/DetailService'
 export default {
     name:'detail-header',
-    components:{
-
-    }
+    data(){
+        return{
+            sellerInfo:[],
+            extras:[
+                'activities',
+                'albums',
+                'license',
+                'identification',
+                'qualification'
+            ],
+        }
+    },
+    computed: {
+        ...Vuex.mapState({
+            lon:'longitude',
+            lat:'latitude'
+        }),
+    },
+    methods: {
+    },
+    mounted () {
+        //请求商家数据
+        getSellerInfo(this.$route.query.id,this.lat,this.lon,this.extras).then((data)=>{
+            console.log(data)
+            this.sellerInfo=data
+        })
+    },
 };
 </script>
 
@@ -30,19 +68,19 @@ export default {
     display: block;
     width: 100%;
     height: 100%;
-     background-color: rgba(119,103,137,.43)
-}   
+    background-color: rgba(119,103,137,0.43)
+} 
 .header-banner{
     position: absolute;
     height: 0.62rem;
     width: 0.62rem;
-    box-shadow: 0 0 0.4vw 0 rgba(0,0,0,.2);
+    box-shadow: 0 0 0.4vw 0 rgba(0,0,0,0.2);
     background: pink;
     bottom: -0.19rem;
     left: 50%;
     margin-left: -0.31rem;
 }
-.title{
+.seller-title{
     line-height: 0.19rem;
     font-size: 0.19rem;
     margin: 0.3rem 0 0.1rem;
@@ -53,6 +91,9 @@ export default {
     font-size: 0.1rem;
     line-height: 0.1rem;
     text-align: center;
+}
+.seller-info span{
+    padding: 0 0.02rem;
 }
 .service{
     text-align: center;
@@ -88,5 +129,32 @@ export default {
     margin-right: 0.07rem;
     color: white;
     background: pink;
+}
+.red-packet{
+    text-align: center;
+}
+.red-packet-active{
+    display: inline-block;
+    width: 1.30rem;
+    height: 0.25rem;
+    line-height: 0.25rem;
+    background: url('../../../../static/images/active-bg.png') no-repeat;
+    background-size: cover;
+    margin-bottom: 0.07rem;
+    color: #5c1603;
+    font-weight: 600;
+}
+.red-packet-active em{
+    display: inline-block;
+    width: 0.95rem;
+    text-align: center;
+}
+.red-packet-active em i{
+    color: #ff5339;
+    width: auto;
+}
+.red-packet-active i{
+    display: inline-block;
+    width: 0.35rem;
 }
 </style>
