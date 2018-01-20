@@ -15,10 +15,36 @@
                   <img src="" alt="" class="menu-banner">
                   <div class="menu-info">
                       <h4 class="dishes-name">现磨豆浆</h4>
-                      <span>月售15分</span>
-                      <div>
+                      <span class="explain">手作肉松饭团</span>
+                      <span class="sales"><em>月售15分</em> <em>好评</em></span>
+                      <div class="buy">
                           <em class="price"><i>￥</i>7</em>
-                          <div><i>-</i><span>1</span><i class="add">+</i></div>
+                          <div class="count"><i class="decrease">-</i><span>1</span><i class="add">+</i></div>
+                      </div>
+                  </div>
+              </dd>
+              <dt class="menu-title one-border-bottom">标题</dt>
+              <dd class="menu-sction clearfix">
+                  <img src="" alt="" class="menu-banner">
+                  <div class="menu-info">
+                      <h4 class="dishes-name">现磨豆浆</h4>
+                      <span class="explain">手作肉松饭团</span>
+                      <span class="sales"><em>月售15分</em> <em>好评</em></span>
+                      <div class="buy">
+                          <em class="price"><i>￥</i>7</em>
+                          <div class="count"><i class="decrease">-</i><span>1</span><i class="add">+</i></div>
+                      </div>
+                  </div>
+              </dd>
+              <dd class="menu-sction clearfix">
+                  <img src="" alt="" class="menu-banner">
+                  <div class="menu-info">
+                      <h4 class="dishes-name">现磨豆浆</h4>
+                      <span class="explain">手作肉松饭团</span>
+                      <span class="sales"><em>月售15分</em> <em>好评</em></span>
+                      <div class="buy">
+                          <em class="price"><i>￥</i>7</em>
+                          <div class="count"><i class="decrease">-</i><span>1</span><i class="add">+</i></div>
                       </div>
                   </div>
               </dd>
@@ -28,10 +54,15 @@
 </template>
 
 <script>
+import {getMenu} from '../../../service/DetailService'
 export default {
     name:'detail-menu',
     components:{
 
+    },
+    mounted () {
+        //求情商品列表
+        getMenu(this.$route.query.id)
     }
 };
 </script>
@@ -77,5 +108,61 @@ export default {
     line-height: 0.13rem;
     font-size: 0.13rem;
     font-weight: 800;
+}
+.explain{
+    display:block;
+    line-height: 0.08rem;
+    margin: 0.08rem 0 0.09rem;
+    font-size: 0.08rem;
+    color: #999999;
+}
+.sales{
+    font-size: 0.09rem;
+    color: #666666;
+}
+.sales em:nth-child(2){
+    padding-left: 0.08rem;
+}
+.buy{
+    width: 1.8rem;
+    display: flex;
+    justify-content: space-between;
+    margin-top:0.11rem; 
+}
+.price{
+    font-size: 0.14rem;
+    color: #ff6600;
+    font-weight: 1000;
+}
+.price i{
+    font-size: 0.08rem;
+    padding-right: 0.02rem;
+}
+.count{
+
+}
+.count i{
+    display: inline-block;
+    text-align: center;
+    height: 0.18rem;
+    width: 0.18rem;
+    line-height: 0.18rem;
+    border-radius: 50%;
+    border:  0.01rem solid #2395ff;
+    font-size: 0.15rem;
+    font-weight: 800;
+}
+.count span{
+    display: inline-block;
+    width: 0.27rem;
+    text-align: center;
+    font-size: 0.13rem;
+}
+.decrease{
+    color: #2395ff;
+}
+.add{
+    background: #2395ff;
+    color: white;
 }
 </style>

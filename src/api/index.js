@@ -61,7 +61,8 @@ const RECOMMEND_URL = '/restapi/shopping/v1/find/recommendation';
 /*
 店铺信息
 https://h5.ele.me
-/restapi/shopping/restaurant/150107564
+/restapi/shopping/restaurant
+/150107564  //id
 ?extras[]=activities
 &extras[]=albums
 &extras[]=license
@@ -73,6 +74,14 @@ https://h5.ele.me
 */
 const SELLER_INFO_URL = '/restapi/shopping/restaurant';
 
+/*
+店铺菜单
+https://h5.ele.me
+/restapi/shopping/v2/menu
+?restaurant_id=150107564
+*/
+///restapi/shopping/v2/menu?restaurant_id=150107564
+const SELLER_MENU_URL = '/restapi/shopping/v2/menu';
 
 export default {
     BANNER_URL,
@@ -82,5 +91,6 @@ export default {
     SUGGEST_URL,
     RECOMMEND_URL,
     SELLER_INFO_URL,
+    SELLER_MENU_URL,
 }
 

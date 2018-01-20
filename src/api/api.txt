@@ -62,6 +62,11 @@ https://h5.ele.me
 &latitude=31.23037
 &longitude=121.473701
 
+店铺菜单
+https://h5.ele.me
+/restapi/shopping/v2/menu
+?restaurant_id=150107564
+
 
 发现
 https://h5.ele.me

@@ -50,3 +50,55 @@ export function getSellerInfo(id,latitude,longitude,extras){
         })
     })
 }
+
+//请求菜单数据
+export function getMenu(id){
+    return new Promise((resolve, reject)=>{
+        axios.get(Api.SELLER_MENU_URL,{
+            params: {
+                restaurant_id:id
+            }
+        }).then((response)=>{
+            console.log(response.data)
+            let menuData=response.data.map(item=>{
+                console.log(item.foods)
+                let food=item.foods.map(food=>{
+                    //判断有没有活动
+                    let activity=null
+                    if(food.activity){
+                        activity={
+                            activity_price:food.activity.fixed_price,//活动价
+                            activity_text:food.activity.applicable_quantity_text,    //活动说明
+                            activity_text_color:food.activity.applicable_quantity_text_color,    //活动说明颜色
+                            activity_num:food.activity.applicable_quantity,
+                        }
+                    }
+                    //判断有没有规格
+                    let specifications=null
+                    if(food.specifications){
+                        specifications=food.specifications
+                    }
+                    
+                    return{
+                        img:handleImage(food.image_path),   //图片
+                        name:food.name,                   //名称
+                        description:food.description,     //说明
+                        month_sales:food.month_sales,     //销量
+                        satisfy_rate:food.satisfy_rate,   //评价
+                        activity,                          //活动
+                        specfoods_price:food.specfoods.original_price,//原价
+                        specifications,           //规格  给规格加上名字 id 和价格
+                        attributes:food.attributes,   //新品种
+                    }
+                })
+                return{
+                    title:item.name,    //标题
+                    title_icon:handleImage(item.icon_url),
+                    food,    //食物
+                }
+            })
+            console.log(menuData)
+            // resolve(menuData)
+        })
+    })
+}
