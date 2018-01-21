@@ -13,18 +13,25 @@
         <div class="active clearfix">
             <div v-if="sellerInfo.activities">
                 <span><i class="active-icon" :style="{background: '#'+sellerInfo.activities[0].icon_color}">{{sellerInfo.activities[0].icon_name}}</i>{{sellerInfo.activities[0].description}}</span>
-                <em>{{sellerInfo.activities.length}}个活动<i class="iconfont more">&#xe600;</i></em>
+                <em @click="showAllActive">{{sellerInfo.activities.length}}个优惠<i class="iconfont more">&#xe600;</i></em>
             </div>
         </div>
         <div class="red-packet"><span class="red-packet-active"><em>共<i>10</i>元专享红包</em><i>领取</i></span></div>
+        <active-all :active='sellerInfo.activities' v-if="showActive" @closeShow='closeShowActive'></active-all>
     </header>
 </template>
 
 <script>
 import Vuex from 'vuex'
+
+import Acctive from './Active'
+
 import {getSellerInfo} from '../../../service/DetailService'
 export default {
     name:'detail-header',
+    components:{
+         [Acctive.name]: Acctive,
+    },
     data(){
         return{
             sellerInfo:[],
@@ -33,8 +40,9 @@ export default {
                 'albums',
                 'license',
                 'identification',
-                'qualification'
+                'qualification',
             ],
+            showActive:false,
         }
     },
     computed: {
@@ -44,6 +52,12 @@ export default {
         }),
     },
     methods: {
+        showAllActive(){
+            this.showActive=true;
+        },
+        closeShowActive(){
+            this.showActive=false;
+        }
     },
     mounted () {
         //请求商家数据
@@ -58,6 +72,9 @@ export default {
 <style scoped>
 .detail-header-wrap{
     width: 100%;
+    background: white;
+    position: relative;
+    z-index: 8;
 }
 .header-img{
     height: 0.65rem;

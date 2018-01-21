@@ -61,8 +61,13 @@ export function getMenu(id){
         }).then((response)=>{
             console.log(response.data)
             let menuData=response.data.map(item=>{
-                console.log(item.foods)
+                //console.log(item.foods)
                 let food=item.foods.map(food=>{
+                    //原价
+                    //console.log(food.specfoods)
+                    let original_price=food.specfoods[0].original_price?food.specfoods[0].original_price:food.specfoods[0].price
+                    //价格
+                    let activity_price=null;
                     //判断有没有活动
                     let activity=null
                     if(food.activity){
@@ -71,34 +76,39 @@ export function getMenu(id){
                             activity_text:food.activity.applicable_quantity_text,    //活动说明
                             activity_text_color:food.activity.applicable_quantity_text_color,    //活动说明颜色
                             activity_num:food.activity.applicable_quantity,
-                        }
+                        };
+                        //console.log(food.activity)
+                        activity_price=food.activity.fixed_price;
                     }
                     //判断有没有规格
                     let specifications=null
                     if(food.specifications){
                         specifications=food.specifications
+
                     }
-                    
+                    //判断价格
+                    let price=activity_price?activity_price:original_price;
                     return{
-                        img:handleImage(food.image_path),   //图片
+                        img:handleImage(food.image_path,130),   //图片
                         name:food.name,                   //名称
                         description:food.description,     //说明
                         month_sales:food.month_sales,     //销量
                         satisfy_rate:food.satisfy_rate,   //评价
                         activity,                          //活动
-                        specfoods_price:food.specfoods.original_price,//原价
+                        price,//价格
                         specifications,           //规格  给规格加上名字 id 和价格
                         attributes:food.attributes,   //新品种
+                        count:0,                    //数量
                     }
                 })
                 return{
                     title:item.name,    //标题
-                    title_icon:handleImage(item.icon_url),
+                    title_icon:handleImage(item.icon_url,90),
                     food,    //食物
                 }
             })
             console.log(menuData)
-            // resolve(menuData)
+            resolve(menuData)
         })
     })
 }

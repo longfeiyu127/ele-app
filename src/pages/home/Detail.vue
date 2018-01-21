@@ -1,12 +1,15 @@
 <template>
-<sub-page-detail pageId="detail">
-        <detail-header></detail-header>
+<div class="list-wrap">
+    <!-- <detail-header></detail-header> -->
+    <sub-page-detail pageId="detail">
         <div class="list">
+            <detail-header></detail-header>
             <detail-nav></detail-nav>
             <!-- <router-view></router-view> -->
             <detail-menu class="one-border-top"></detail-menu>
         </div>
-</sub-page-detail>
+    </sub-page-detail>
+</div>
 </template>
 
 <script>
@@ -27,9 +30,10 @@ export default {
 </script>
 
 <style scoped>
-.list{
-    margin-top: 0.02rem;
-    height: 7rem;
-    background: white;
+.list-wrap{
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }
+
 </style>

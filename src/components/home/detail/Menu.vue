@@ -1,51 +1,25 @@
 <template>
-  <section class="detail-header-wrap">        
+  <section class="detail-header-wrap clearfix">        
       <ul class="menu-list">
-          <li class="list one-border-bottom">早餐</li>
-          <li class="list one-border-bottom">早餐</li>
-          <li class="list one-border-bottom">早餐</li>
-          <li class="list one-border-bottom">早餐</li>
-          <li class="list one-border-bottom">早餐</li>
-    
+          <li class="list" v-for="(item,index)  in  menuData" :key="index">
+              <img class="title-icon" v-if="item.title_icon" :src="item.title_icon" alt="">{{item.title}}
+            </li>
       </ul>
-      <div class="menu-main">
-          <dl class="main-list">
-              <dt class="menu-title one-border-bottom">标题</dt>
-              <dd class="menu-sction clearfix">
-                  <img src="" alt="" class="menu-banner">
+      <div class="menu-main" ref="Iscroll">
+          <dl class="main-list" v-for="(item,i)  in  menuData" :key="i">
+              <dt class="menu-title one-border-bottom">{{item.title}}</dt>
+              <dd class="menu-sction clearfix" v-for="(food,j) in item.food" :key="j">
+                  <img :src="food.img" alt="" class="menu-banner">
                   <div class="menu-info">
-                      <h4 class="dishes-name">现磨豆浆</h4>
-                      <span class="explain">手作肉松饭团</span>
-                      <span class="sales"><em>月售15分</em> <em>好评</em></span>
-                      <div class="buy">
-                          <em class="price"><i>￥</i>7</em>
-                          <div class="count"><i class="decrease">-</i><span>1</span><i class="add">+</i></div>
-                      </div>
-                  </div>
-              </dd>
-              <dt class="menu-title one-border-bottom">标题</dt>
-              <dd class="menu-sction clearfix">
-                  <img src="" alt="" class="menu-banner">
-                  <div class="menu-info">
-                      <h4 class="dishes-name">现磨豆浆</h4>
-                      <span class="explain">手作肉松饭团</span>
-                      <span class="sales"><em>月售15分</em> <em>好评</em></span>
-                      <div class="buy">
-                          <em class="price"><i>￥</i>7</em>
-                          <div class="count"><i class="decrease">-</i><span>1</span><i class="add">+</i></div>
-                      </div>
-                  </div>
-              </dd>
-              <dd class="menu-sction clearfix">
-                  <img src="" alt="" class="menu-banner">
-                  <div class="menu-info">
-                      <h4 class="dishes-name">现磨豆浆</h4>
-                      <span class="explain">手作肉松饭团</span>
-                      <span class="sales"><em>月售15分</em> <em>好评</em></span>
-                      <div class="buy">
-                          <em class="price"><i>￥</i>7</em>
-                          <div class="count"><i class="decrease">-</i><span>1</span><i class="add">+</i></div>
-                      </div>
+                        <h4 class="dishes-name">{{food.name}}</h4>
+                        <span class="explain" v-if="food.description">{{food.description}}</span>
+                        <span class="sales">
+                            <em>月售{{food.month_sales}}份</em>
+                            <em>好评{{food.satisfy_rate}}%</em></span>
+                        <div class="buy">
+                          <em class="price"><i>￥</i>{{food.price}}</em>
+                          <div class="count"><i class="decrease"  v-show="food.count">-</i><span class="bur-count" v-show="food.count">{{food.count}}</span><i class="add">+</i></div>
+                        </div>
                   </div>
               </dd>
           </dl>
@@ -55,21 +29,44 @@
 
 <script>
 import {getMenu} from '../../../service/DetailService'
+import Iscroll from 'iscroll/build/iscroll-probe'
 export default {
     name:'detail-menu',
     components:{
 
     },
+    data(){
+        return{
+            menuData:[]
+        }
+    },
+    methods: {
+        // pageRefresh(){
+        //     this.MyScroll.refresh();
+        // },  
+    },
     mounted () {
         //求情商品列表
-        getMenu(this.$route.query.id)
+        getMenu(this.$route.query.id).then(data=>{
+            //console.log(data)
+            this.menuData=data
+        })
+
+        // //页面滑动
+        // console.log(this.$refs.Iscroll)
+        // this.MyScroll =new Iscroll(this.$refs.Iscroll,{
+        //     // scrollbars: true,
+        //     probeType: 3
+        // });
+        // this.pageRefresh()
+        // //this.MyScroll.on('scrollStart', this.pageRefresh);
     }
 };
 </script>
 
 <style scoped>
 .menu-list{
-     width: 0.74rem;
+    width: 0.74rem;
     float: left;
 }
 .list{
@@ -77,18 +74,27 @@ export default {
     text-align: center;
     line-height: 0.47rem;
     background: #f8f8f8;
-    font-size: 0.11rem;
+    font-size: 0.115rem;
     color: #666666;
+    border-bottom: 0.01rem solid #e8e8e8;
 }
 .menu-main{
     width: 2.76rem;
     float: right;
 }
+.title-icon{
+    display: inline-block;
+    width: 0.13rem;
+    height: 0.13rem;
+    border-radius: 0.01rem;
+    margin-right: 0.06rem;
+    vertical-align: middle;
+}
 .menu-title{
     height: 0.27rem;
     line-height: 0.27rem;
     font-size: 0.11rem;
-    font-weight: 900;
+    font-weight: 1000;
     color: #6d6d6d;
 }
 .menu-sction{
@@ -108,13 +114,21 @@ export default {
     line-height: 0.13rem;
     font-size: 0.13rem;
     font-weight: 800;
+    width: 1.7rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .explain{
     display:block;
     line-height: 0.08rem;
-    margin: 0.08rem 0 0.09rem;
+    margin: 0.08rem 0 0.08rem;
     font-size: 0.08rem;
     color: #999999;
+    width: 1.7rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .sales{
     font-size: 0.09rem;
@@ -146,7 +160,7 @@ export default {
     text-align: center;
     height: 0.18rem;
     width: 0.18rem;
-    line-height: 0.18rem;
+    line-height: 0.17rem;
     border-radius: 50%;
     border:  0.01rem solid #2395ff;
     font-size: 0.15rem;
