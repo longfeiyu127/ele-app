@@ -1,8 +1,8 @@
 <template>
   <section class="detail-header-wrap clearfix">        
       <ul class="menu-list">
-          <li class="list" v-for="(item,index)  in  menuData" :key="index">
-              <img class="title-icon" v-if="item.title_icon" :src="item.title_icon" alt="">{{item.title}}
+            <li class="list" v-for="(item,index)  in  menuData" :key="index">
+                <img class="title-icon" v-if="item.title_icon" :src="item.title_icon" alt="">{{item.title}}
             </li>
       </ul>
       <div class="menu-main" ref="Iscroll">
@@ -52,7 +52,7 @@ export default {
             this.menuData=data
         })
 
-        // //页面滑动
+        //页面滑动
         // console.log(this.$refs.Iscroll)
         // this.MyScroll =new Iscroll(this.$refs.Iscroll,{
         //     // scrollbars: true,
@@ -70,9 +70,9 @@ export default {
     float: left;
 }
 .list{
-    height: 0.47rem;
-    text-align: center;
-    line-height: 0.47rem;
+    line-height: 0.13rem;
+    box-sizing: border-box;
+    padding: 0.17rem 0.08rem;
     background: #f8f8f8;
     font-size: 0.115rem;
     color: #666666;
@@ -115,14 +115,14 @@ export default {
     font-size: 0.13rem;
     font-weight: 800;
     width: 1.7rem;
-    overflow: hidden;
+    /* overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: nowrap; */
 }
 .explain{
     display:block;
-    line-height: 0.08rem;
-    margin: 0.08rem 0 0.08rem;
+    line-height: 0.10rem;
+    margin-top: 0.07rem;
     font-size: 0.08rem;
     color: #999999;
     width: 1.7rem;
@@ -131,7 +131,9 @@ export default {
     white-space: nowrap;
 }
 .sales{
+    display: block;
     font-size: 0.09rem;
+    margin-top: 0.07rem;
     color: #666666;
 }
 .sales em:nth-child(2){

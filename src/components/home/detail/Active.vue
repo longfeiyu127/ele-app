@@ -4,16 +4,18 @@
         <div class="closeA" @click="close"></div>
         <div class="main">
             <p class="title">优惠活动</p>
-            <div class="active-list">
-                <ul>
-                    <li class="active" v-for="(item,index) in active" :key="index">
-                        <span>
-                            <i class="active-icon" :style="{background: '#'+item.icon_color}">{{item.icon_name}}</i>
-                            {{item.description}}
-                        </span>
-                    </li>
-                </ul>
-            </div>
+                <div class="active-list">
+                    <scroll-page>
+                        <ul>
+                            <li class="active" v-for="(item,index) in atciveData" :key="index">
+                                <span>
+                                    <i class="active-icon" :style="{background: '#'+item.icon_color}">{{item.icon_name}}</i>
+                                    {{item.description}}
+                                </span>
+                            </li>
+                        </ul>
+                    </scroll-page>
+                </div>
             <span class="close" @click="close">×</span>
         </div>
     </div>
@@ -22,10 +24,17 @@
 
 <script>
 import SubpageStatic from '../../../common/SubpageStatic'
+import ScrollPage from '../../../common/ScrollPage'
 export default {
     name:'active-all',
     components:{
          [SubpageStatic.name]: SubpageStatic,
+         [ScrollPage.name]: ScrollPage,
+    },
+    data(){
+        return{
+            atciveData:[]
+        }
     },
     props:{
         active:Array,
@@ -36,7 +45,9 @@ export default {
         }
     },
     mounted () {
-    
+        this.$center.$on('getActiveData',(data)=>{
+            this.atciveData=data
+        })
     }
     
 };

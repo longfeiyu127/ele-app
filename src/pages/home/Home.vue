@@ -13,6 +13,7 @@
 </template>
 
 <script>
+
 import Page from '../../common/Page'
 import Subpage from '../../common/Subpage'
 import Header from '../../components/home/index/Header'
@@ -49,7 +50,7 @@ export default {
             //加载完毕
             this.$refs.page.getDataEnd()
         }
-    }
+    },
 }
 </script>
 

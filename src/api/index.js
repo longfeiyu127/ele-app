@@ -83,6 +83,27 @@ https://h5.ele.me
 ///restapi/shopping/v2/menu?restaurant_id=150107564
 const SELLER_MENU_URL = '/restapi/shopping/v2/menu';
 
+/*
+定位地址address
+https://h5.ele.me
+/restapi/bgs/poi/reverse_geo_coding
+?latitude=22.54286
+&longitude=114.059563
+*/
+const ADDRESS_URL = '/restapi/bgs/poi/reverse_geo_coding';
+
+/**
+请求附近位置
+https://h5.ele.me
+/restapi/bgs/poi/search_poi_nearby
+?keyword=%E5%90%8E%E7%91%9E
+&offset=0
+&limit=20
+&latitude=22.630428
+&longitude=113.836366
+ */
+const NEWADDRESS_URL = '/restapi/bgs/poi/search_poi_nearby';
+
 export default {
     BANNER_URL,
     IMAGE_HOST,
@@ -92,5 +113,7 @@ export default {
     RECOMMEND_URL,
     SELLER_INFO_URL,
     SELLER_MENU_URL,
+    ADDRESS_URL,
+    NEWADDRESS_URL,
 }
 

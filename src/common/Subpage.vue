@@ -1,8 +1,6 @@
 <template>
-<div class="sub-page">
-    <div class="subPage" ref="subPage">
+<div class="sub-page" ref="subPage">
         <slot></slot>
-    </div>
 </div>
 </template>
 
@@ -12,16 +10,15 @@ export default {
     name:'sub-page',
     methods:{
         pageRefresh(){
-            console.log(1)
             this.MyScroll.refresh();
-        },  
+        },
     },
     mounted () {
         this.MyScroll =new Iscroll(this.$refs.subPage,{
             // scrollbars: true,
             probeType: 3
         });
-        this.pageRefresh()
+        this.MyScroll.on('scrollStart', this.pageRefresh);
     }
 };
 </script>
@@ -35,6 +32,7 @@ export default {
     width: 100%;
     height: 100%;
     z-index: 6;
+    background: white;
 }
 .subPage{
     height: 100%;

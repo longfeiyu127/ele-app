@@ -24,7 +24,7 @@
                                 <dd class="activity-title">{{activities.description}}</dd>
                             </dl>
                         </div>
-                        <div class="activity-add" @click="Show(index)" v-if="seller.activities.length>2">{{seller.activities.length}}个活动<i class="iconfont">&#xe600;</i></div>
+                        <div class="activity-add" @click.stop="Show(index)" v-if="seller.activities.length>2">{{seller.activities.length}}个活动<i class="iconfont">&#xe600;</i></div>
                     </div>
                 </div> 
             </li>
@@ -87,12 +87,14 @@ export default {
     watch:{
         lon(){
             if(this.flag){
+                this.sellerData=[];
                 this.flag=false;
                 this.requireData();
             }      
         },
         lat(){
             if(this.flag){
+                this.sellerData=[];
                 this.flag=false;
                 this.requireData();
             }    
