@@ -17,8 +17,12 @@
                             <em>月售{{food.month_sales}}份</em>
                             <em>好评{{food.satisfy_rate}}%</em></span>
                         <div class="buy">
-                          <em class="price"><i>￥</i>{{food.price}}</em>
-                          <div class="count"><i class="decrease"  v-show="food.count">-</i><span class="bur-count" v-show="food.count">{{food.count}}</span><i class="add">+</i></div>
+                            <em class="price"><i>￥</i>{{food.price}}</em>
+                            <div class="count">
+                              <i class="decrease"  v-show="food.count" @click="decrease(i,j)">-</i>
+                              <span class="bur-count" v-show="food.count">{{food.count}}</span>
+                              <i class="add" @click="add(i,j)">+</i>
+                            </div>
                         </div>
                   </div>
               </dd>
@@ -43,7 +47,16 @@ export default {
     methods: {
         // pageRefresh(){
         //     this.MyScroll.refresh();
+        //     console.log('触发了刷新')
         // },  
+        //增加
+        add(i,j){
+            this.menuData[i].food[j].count++
+        },
+        //减少
+        decrease(i,j){
+            this.menuData[i].food[j].count--
+        }
     },
     mounted () {
         //求情商品列表
@@ -52,22 +65,31 @@ export default {
             this.menuData=data
         })
 
-        //页面滑动
+    },
+    updated(){
+        // 页面滑动
         // console.log(this.$refs.Iscroll)
-        // this.MyScroll =new Iscroll(this.$refs.Iscroll,{
+        // if(!this.MyScroll){
+        //     this.MyScroll =new Iscroll(this.$refs.Iscroll,{
         //     // scrollbars: true,
         //     probeType: 3
-        // });
+        //     });
+        // }
         // this.pageRefresh()
-        // //this.MyScroll.on('scrollStart', this.pageRefresh);
+        // this.MyScroll.on('scrollStart', this.pageRefresh);
     }
 };
 </script>
 
 <style scoped>
+.detail-header-wrap{
+    height: 100%;
+}
 .menu-list{
     width: 0.74rem;
     float: left;
+    height: 100%;
+    overflow: auto;
 }
 .list{
     line-height: 0.13rem;
@@ -81,6 +103,8 @@ export default {
 .menu-main{
     width: 2.76rem;
     float: right;
+    height: 100%;
+    overflow: auto;
 }
 .title-icon{
     display: inline-block;

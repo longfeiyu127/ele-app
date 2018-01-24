@@ -13,17 +13,14 @@ const state = {
 const mutations={
     //修改纬度方法
     modifyLongitude(state,param){
-        console.log(state,'触发修改纬度事件');
         state.longitude = param;
     },
     //修改经度方法
     modifyLatitude(state,param){
-        console.log(state,'触发修改经度事件');
         state.latitude = param;
     },
     //修改地址方法
     modifyAddress(state,param){
-        console.log(state,'触发修改地址事件');
         state.address = param;
     }
 }
@@ -32,7 +29,6 @@ const actions = {
     //定位事件
     getLocationActive(context){
         return new Promise((resolve, reject)=>{
-            console.log('触发定位')
             //获取定位
             setTimeout(()=>{
                 // let lon=121.473701;
@@ -43,7 +39,6 @@ const actions = {
                 //113.844168,22.631847
                 context.commit('modifyLongitude',lon)
                 context.commit('modifyLatitude',lat)
-                console.log('定位成功')
                 resolve()
             })
         })

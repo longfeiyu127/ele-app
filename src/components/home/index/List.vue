@@ -8,7 +8,13 @@
                     <div class="sellerInfo-main one-border-bottom">
                         <h4 class="sellerTitle"><span><i class="premium" v-if="seller.premium">品牌</i>{{seller.name}}</span><span class="invoice" v-if="seller.supports.length">票</span></h4>
                         <div class="grade">
-                            <div class="evaluate"><div class="star star-top"><div class="star-bottom-box"  :style="{width:seller.rating*20+'%'}"><i class="star-bottom"></i></div></div>{{seller.rating}} 月售{{seller.orderNum}}单</div>
+                            <div class="evaluate">
+                                <div class="star star-top">
+                                    <div class="star-bottom-box"  :style="{width:seller.rating*20+'%'}">
+                                        <i class="star-bottom"></i>
+                                    </div>
+                                </div>{{seller.rating}} 月售{{seller.orderNum}}单
+                            </div>
                             <div class="hummingbird" v-if="seller.deliveryMode">蜂鸟专送</div>
                         </div>
                         <div class="serve">

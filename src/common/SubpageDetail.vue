@@ -17,7 +17,7 @@ export default {
     },
     mounted () {
         this.MyScroll =new Iscroll(this.$refs.subPage,{
-            scrollbars: true,
+            // scrollbars: true,
             probeType: 3
         });
         this.pageRefresh()

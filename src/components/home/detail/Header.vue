@@ -1,7 +1,8 @@
 <template>
 <div>
+    <!-- :style="{background-image: bgimg}' -->
     <header class="detail-header-wrap">    
-        <div class="header-img"><img :src="sellerInfo.image_path" alt="" class="header-banner"></div>    
+        <div class="header-img" :style="{background: sellerInfo.image_path}"><img :src="sellerInfo.image_path_top" alt="" class="header-banner"></div>    
         <h3 class="seller-title">{{sellerInfo.name}}<i class="iconfont">&#xe600;</i></h3>
         <div class="seller-info">
             <span>{{sellerInfo.rating}}</span>
@@ -64,8 +65,9 @@ export default {
     mounted () {
         //请求商家数据
         getSellerInfo(this.$route.query.id,this.lat,this.lon,this.extras).then((data)=>{
-            console.log(data)
-            this.sellerInfo=data
+            // console.log(data)
+            this.sellerInfo=data;
+            this.$center.$emit('SellerInfo',data)
         })
     },
 };

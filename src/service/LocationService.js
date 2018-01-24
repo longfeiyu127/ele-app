@@ -41,7 +41,7 @@ export function getNewAddress(keyword,latitude,longitude){
                 longitude,
             }
         }).then((result)=>{
-            console.log(result)
+            // console.log(result)
             let newData = result.data.map(data=>{
                 return{
                     name:data.name,

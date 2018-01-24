@@ -41,7 +41,7 @@ export function getSeller(latitude,longitude,offset,limit,rank_id){
                 terminal:'h5',
             }
         }).then(result=>{
-            console.log(result.data.items)
+            // console.log(result.data.items)
             let newData=result.data.items.map(item=>{
                 let activities=item.restaurant.activities.map(val=>{      //活动  
                     return {
@@ -85,7 +85,7 @@ export function getSellerInfo(latitude,longitude,extras){
                 longitude,
             }
         }).then((result)=>{
-            console.log(result)
+            // console.log(result)
             // let newData=result.data[0].entries.map(item=>{
             //     return {
             //         name:item.name,

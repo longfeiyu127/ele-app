@@ -5,16 +5,16 @@
         <div class="main">
             <p class="title">优惠活动</p>
                 <div class="active-list">
-                    <scroll-page>
-                        <ul>
-                            <li class="active" v-for="(item,index) in atciveData" :key="index">
-                                <span>
-                                    <i class="active-icon" :style="{background: '#'+item.icon_color}">{{item.icon_name}}</i>
-                                    {{item.description}}
-                                </span>
-                            </li>
-                        </ul>
-                    </scroll-page>
+                    <!-- <scroll-page> -->
+                    <ul class="active-box">
+                        <li class="active" v-for="(item,index) in atciveData" :key="index">
+                            <span>
+                                <i class="active-icon" :style="{background: '#'+item.icon_color}">{{item.icon_name}}</i>
+                                {{item.description}}
+                            </span>
+                        </li>
+                    </ul>
+                    <!-- </scroll-page> -->
                 </div>
             <span class="close" @click="close">×</span>
         </div>
@@ -86,6 +86,7 @@ export default {
 .active-list{
     height: 1.86rem;
     overflow: hidden;
+    overflow: auto;
 }
 .active{
     line-height: 0.15rem;

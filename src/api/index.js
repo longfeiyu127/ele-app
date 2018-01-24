@@ -104,6 +104,34 @@ https://h5.ele.me
  */
 const NEWADDRESS_URL = '/restapi/bgs/poi/search_poi_nearby';
 
+
+/**
+评价总体信息
+https://h5.ele.me
+/restapi/ugc/v2/restaurants/1086080/ratings/scores
+*/
+const EVALUATE_INFO_URL = '/restapi/ugc/v2/restaurants';
+
+/**
+ * 评价总列表
+评价总列表
+https://h5.ele.me
+/restapi/ugc/v2/restaurants/1086080/ratings/tags
+ */
+//evaluate
+const EVALUATE_LIST_URL = '/restapi/ugc/v2/restaurants';
+
+ /**
+ 分类评价
+https://h5.ele.me
+/restapi/ugc/v3/restaurants/1086080/ratings
+?has_content=true
+&tag_name=%E6%9C%89%E5%9B%BE    //有值 为分类评价  没有值为全部评价
+&offset=0
+&limit=8
+*/
+const EVALUATE_AMIN_URL = '/restapi/ugc/v3/restaurants';
+
 export default {
     BANNER_URL,
     IMAGE_HOST,
@@ -115,5 +143,8 @@ export default {
     SELLER_MENU_URL,
     ADDRESS_URL,
     NEWADDRESS_URL,
+    EVALUATE_INFO_URL,
+    EVALUATE_LIST_URL,
+    EVALUATE_AMIN_URL,
 }
 

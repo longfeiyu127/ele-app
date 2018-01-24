@@ -4,9 +4,13 @@
     <sub-page-detail pageId="detail">
         <div class="list">
             <detail-header @showAllActive='showAllActive'></detail-header>
-            <detail-nav></detail-nav>
+            <detail-nav @cut='tabselect'></detail-nav>
             <!-- <router-view></router-view> -->
-            <detail-menu class="one-border-top"></detail-menu>
+            <div class="select-box one-border-top">
+                <detail-menu class="one-border-top" v-show="isShow==0"></detail-menu>
+                <detail-evaluate class="one-border-top" v-show="isShow==1"></detail-evaluate>
+                <detail-seller class="one-border-top" v-show="isShow==2"></detail-seller>
+            </div>
         </div>
     </sub-page-detail>
     <active-all v-show="showActive" @closeShow='closeShowActive'></active-all>
@@ -19,6 +23,9 @@ import Header from '../../components/home/detail/Header'
 import Nav from '../../components/home/detail/Nav'
 import List from '../../components/home/detail/List'
 import Menu from '../../components/home/detail/Menu'
+import Evaluate from '../../components/home/detail/Evaluate'
+import SellerInfo from '../../components/home/detail/SellerInfo'
+
 import Acctive from '../../components/home/detail/Active'
 export default {
     components: {
@@ -27,11 +34,14 @@ export default {
         [Nav.name]: Nav,
         [List.name]: List,
         [Menu.name]: Menu,
+        [Evaluate.name]: Evaluate,
+        [SellerInfo.name]: SellerInfo,
         [Acctive.name]: Acctive,
     },
     data(){
         return{
             showActive:false,
+            isShow:0,
         }
     },
     methods: {
@@ -40,9 +50,13 @@ export default {
         },
         showAllActive(){
            this.showActive=true;
+        },
+        //切换
+        tabselect(index){
+            console.log(index);
+            this.isShow=index;
         }
     },
-
 }
 </script>
 
@@ -55,5 +69,16 @@ export default {
     left: 0;
     bottom: 0;
 }
-
+.list{
+    height: 8.72rem;
+    position: relative;
+}
+.select-box{
+    position: absolute;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    padding-top: 2.7rem;
+    top: 0;
+}
 </style>
