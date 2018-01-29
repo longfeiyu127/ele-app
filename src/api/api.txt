@@ -129,3 +129,100 @@ https://h5.ele.me
 &tag_name=%E6%9C%89%E5%9B%BE
 &offset=0
 &limit=8
+
+
+banner图详情 列表
+https://h5.ele.me
+/restapi/shopping/v2/foods_page/sift_factors
+?entry_id=20004689          
+&longitude=114.059563
+&latitude=22.54286
+&terminal=h5
+
+banner图 全部内容
+https://h5.ele.me
+/restapi/shopping/v3/restaurants
+?latitude=22.54286
+&longitude=114.059563
+&keyword=
+&offset=0
+&limit=8
+&extras[]=activities
+&extras[]=tags
+&terminal=h5
+&brand_ids[]=
+&restaurant_category_ids[]=209
+&restaurant_category_ids[]=212
+&restaurant_category_ids[]=213
+
+
+全部分类
+https://h5.ele.me
+/restapi/shopping/v2/restaurant/category
+?latitude=22.54286
+&longitude=114.059563
+
+选择分类
+https://h5.ele.me
+/restapi/shopping/v3/restaurants
+?latitude=22.54286&longitude=114.059563
+&keyword=
+&offset=0
+&limit=8
+&extras[]=activities
+&extras[]=tags
+&terminal=h5
+&rank_id=
+&restaurant_category_ids[]=234
+
+https://h5.ele.me
+/restapi/shopping/v3/restaurants
+?latitude=22.54286
+&longitude=114.059563
+&keyword=
+&offset=0
+&limit=8
+&extras[]=activities
+&extras[]=tags
+&terminal=h5
+&rank_id=
+&restaurant_category_ids[]=7
+
+筛选数据
+https://h5.ele.me
+/restapi/shopping/v1/restaurants/filter-bar/attributes
+?latitude=22.54286
+&longitude=114.059563
+&terminal=h5
+
+请求筛选的数据
+https://h5.ele.me
+/restapi/shopping/v3/restaurants
+?latitude=22.54286
+&longitude=114.059563
+&keyword=
+&offset=0
+&limit=8
+&extras[]=activities
+&extras[]=tags
+&terminal=h5
+&rank_id=
+&order_by=5 //配列方式
+&activity_types[]=4 //活动类型
+&support_ids[]=8    //商家属性
+&support_ids[]=7    //商家属性
+&delivery_mode[]=1  //配送方式
+&average_cost_ids[]=1   //人均消费
+&super_vip=1            //会员红包
+&restaurant_category_ids[]=20
+9&restaurant_category_ids[]=212
+&restaurant_category_ids[]=21
+3&restaurant_category_ids[]=214
+&restaurant_category_ids[]=215
+&restaurant_category_ids[]=216
+
+热门搜索
+https://h5.ele.me
+/restapi/shopping/v3/hot_search_words
+?latitude=22.54286
+&longitude=114.059563

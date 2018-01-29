@@ -5,7 +5,6 @@
         <div class="list">
             <detail-header @showAllActive='showAllActive'></detail-header>
             <detail-nav @cut='tabselect'></detail-nav>
-            <!-- <router-view></router-view> -->
             <div class="select-box one-border-top">
                 <detail-menu class="one-border-top" v-show="isShow==0"></detail-menu>
                 <detail-evaluate class="one-border-top" v-show="isShow==1"></detail-evaluate>

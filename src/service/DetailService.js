@@ -17,7 +17,7 @@ export function getSellerInfo(id,latitude,longitude,extras){
                 longitude,
             }
         }).then((response)=>{
-            console.log(response.data.distance)
+            // console.log(response.data.distance)
             let gotData={
                 is_premium:response.data.is_premium,  //是否品牌
                 name:response.data.name,  //店名
@@ -26,7 +26,7 @@ export function getSellerInfo(id,latitude,longitude,extras){
                 delivery_mode:response.data.delivery_mode.text,  //蜂鸟专送
                 order_lead_time:response.data.order_lead_time,   //提前期
                 distance:response.data.distance, //距离
-                phone:response.data.phone,
+                phone:response.data.phone,      //电话
                 image_path:"url("+handleBgImage(handleImage(response.data.image_path,130))+")",    //顶部
                 image_path_top:handleImage(response.data.image_path,130),
                 image_hash:handleImage(response.data.shop_sign.image_hash,90),   //brand 图片
@@ -51,9 +51,9 @@ export function getSellerInfo(id,latitude,longitude,extras){
                   icon_color:response.data.supports.icon_color,
                   description:response.data.supports.description
                 },
-                address:response.data.address,
+                address:response.data.address,                      //地址
                 opening_hours:response.data.opening_hours[0],      //营业时间
-                flavors:response.data.flavors,      //品类
+                flavors:response.data.flavors?(response.data.flavors.map(item=>item.name)).join(','):null,      //品类
             };
             resolve(gotData)
         })
@@ -93,7 +93,6 @@ export function getMenu(id){
                     let specifications=null
                     if(food.specifications){
                         specifications=food.specifications
-
                     }
                     //判断价格
                     let price=activity_price?activity_price:original_price;
@@ -174,7 +173,7 @@ export function getEvaluateMain(id,tag_name){
                 limit:8
             }
         }).then((response)=>{
-            console.log(response.data)
+            // console.log(response.data)
             let newData=response.data.map(data=>{
                 let order_images=null;
                 if(data.order_images){

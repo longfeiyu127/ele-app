@@ -1,4 +1,5 @@
 <template>
+<scroll-page>
   <section class="detail-wrap">        
       <ul class="info-box">
         <li class="info-list one-border-bottom">
@@ -12,7 +13,7 @@
           <h4 class="info-title">活动与服务</h4>
           <div class="info-main">
             <ul class="active-box">
-                <li class="active" v-for="(item,index) in 0" :key="index">
+                <li class="active" v-for="(item,index) in sellerInfo.activities" :key="index">
                     <span>
                         <i class="active-icon" :style="{background: '#'+item.icon_color}">
                           {{item.icon_name}}
@@ -38,15 +39,19 @@
             <p>简介</p>
             <div class="synopsis one-border-bottom">
               <i>品类</i>
-              <p>盖浇饭,箭筒</p>
+              <p>{{sellerInfo.flavors}}</p>
             </div>
             <div class="synopsis  one-border-bottom">
-              <i>品类</i>
-              <p>盖浇饭,箭筒</p>
+              <i>商家电话</i>
+              <p>{{sellerInfo.phone}}</p>
             </div>
             <div class="synopsis one-border-bottom">
-              <i>品类</i>
-              <p>盖浇饭,箭筒</p>
+              <i>地址</i>
+              <p>{{sellerInfo.address}}</p>
+            </div>
+            <div class="synopsis one-border-bottom">
+              <i>营业时间</i>
+              <p>{{sellerInfo.opening_hours}}</p>
             </div>
           </div>
         </li>
@@ -55,13 +60,15 @@
         </li>
       </ul>
   </section>
+</scroll-page>
 </template>
 
 <script>
+import ScrollPage from '../../../common/ScrollPage'
 export default {
     name:'detail-seller',
     components:{
-
+      [ScrollPage.name]:ScrollPage
     },
     data(){
       return{
@@ -70,7 +77,7 @@ export default {
     },
     mounted () {
       this.$center.$on('SellerInfo',(data)=>{
-        console.log(data);
+        // console.log(data);
         this.sellerInfo=data;
       })
     }

@@ -1,12 +1,18 @@
 <template>
-    <div class="search">
+    <div class="search" @click="goSearch">
         <span><i class="iconfont">&#xe69d;</i>搜索商家、商品名称</span>
     </div>
 </template>
 
 <script>
+
 export default {
-    name:'home-search'
+    name:'home-search',
+    methods: {
+        goSearch(){
+            this.$router.push('/home/search')
+        }
+    }
 };
 </script>
 

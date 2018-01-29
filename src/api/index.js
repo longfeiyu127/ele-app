@@ -132,6 +132,66 @@ https://h5.ele.me
 */
 const EVALUATE_AMIN_URL = '/restapi/ugc/v3/restaurants';
 
+/*
+banner图详情 列表
+https://h5.ele.me
+/restapi/shopping/v2/foods_page/sift_factors
+?entry_id=20004689          
+&longitude=114.059563
+&latitude=22.54286
+&terminal=h5
+*/
+const BANNERLIST_URL = '/restapi/shopping/v2/foods_page/sift_factors';
+
+/*
+https://h5.ele.me
+/restapi/shopping/v3/restaurants
+?latitude=22.54286
+&longitude=114.059563
+&keyword=
+&offset=0
+&limit=8
+&extras[]=activities
+&extras[]=tags
+&terminal=h5
+&brand_ids[]=
+&restaurant_category_ids[]=209
+&restaurant_category_ids[]=212
+&restaurant_category_ids[]=213
+*/
+const BANNER_DATA_URL='/restapi/shopping/v3/restaurants'
+
+/*
+全部分类
+https://h5.ele.me
+/restapi/shopping/v2/restaurant/category
+?latitude=22.54286
+&longitude=114.059563
+categories
+*/
+const CATRGORIES_URL='/restapi/shopping/v2/restaurant/category'
+
+
+/*
+筛选数据
+https://h5.ele.me
+/restapi/shopping/v1/restaurants/filter-bar/attributes
+?latitude=22.54286
+&longitude=114.059563
+&terminal=h5
+//filtrateData
+*/
+const FILTRATEDATA_URL='/restapi/shopping/v1/restaurants/filter-bar/attributes'
+
+/*
+热门搜索
+https://h5.ele.me
+/restapi/shopping/v3/hot_search_words
+?latitude=22.54286
+&longitude=114.059563
+*/
+const HOTSEARCH_URL='/restapi/shopping/v3/hot_search_words'
+
 export default {
     BANNER_URL,
     IMAGE_HOST,
@@ -146,5 +206,15 @@ export default {
     EVALUATE_INFO_URL,
     EVALUATE_LIST_URL,
     EVALUATE_AMIN_URL,
+    BANNERLIST_URL,
+    BANNER_DATA_URL,
+    CATRGORIES_URL,
+    FILTRATEDATA_URL,
+    HOTSEARCH_URL,
 }
+
+
+
+
+
 

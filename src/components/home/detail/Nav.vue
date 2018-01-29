@@ -38,6 +38,7 @@ export default {
     display: flex;
     justify-content: space-around;
     margin-bottom: 0.02rem;
+    background: white;
 }
 .target .targetA{
     line-height: 0.36rem;

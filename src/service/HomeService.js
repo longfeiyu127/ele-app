@@ -17,7 +17,8 @@ export function getBanner(lat,lon,tmp){
             let newData=result.data[0].entries.map(item=>{
                 return {
                     name:item.name,
-                    img:handleImage(item.image_hash,90) 
+                    img:handleImage(item.image_hash,90),
+                    entry_id:item.id,
                 }
             })
             let resultData =  handleArray(newData,8)

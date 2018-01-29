@@ -1,4 +1,5 @@
 <template>
+<scroll-page>
   <section class="detail-header-wrap">        
       <div class="evaluate-header clearfix">
             <div class="header-left one-border-right">
@@ -50,17 +51,19 @@
           </detail-evaluate-list>
       </div>
   </section>
+</scroll-page>
 </template>
 
 <script>
 import EvaluateList from './EvaluateList'
-
+import ScrollPage from '../../../common/ScrollPage'
 import {getEvaluateInfo} from '../../../service/DetailService'
 import {getEvaluateList} from '../../../service/DetailService'
 export default {
     name:'detail-evaluate',
     components:{
-        [EvaluateList.name]:EvaluateList
+        [EvaluateList.name]:EvaluateList,
+        [ScrollPage.name]:ScrollPage
     },
     data(){
         return{
@@ -82,7 +85,7 @@ export default {
         })
         //请求评价总列表
         getEvaluateList(this.$route.query.id).then(data=>{
-            console.log(data)
+            // console.log(data)
             this.evaluateList=data
         })
     },

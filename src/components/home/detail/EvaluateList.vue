@@ -44,7 +44,7 @@ export default {
         Show:String,
     },
     mounted () {
-        console.log(this.Show)
+        // console.log(this.Show)
         getEvaluateMain(this.$route.query.id,this.Show).then(data=>{
             this.evaluateMain=data
         })

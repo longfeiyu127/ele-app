@@ -10,7 +10,7 @@ export function getAddress(lat,lon){
                 'longitude': lon
             }
         }).then((result)=>{
-            console.log(result)
+            // console.log(result)
             let newData={
                 name:result.data.name,
                 address:result.data.address,

@@ -4,10 +4,13 @@
             <swiper :options="swiperOption" ref="mySwiper" class="swiper-wrapper">
                 <!-- slides -->
                 <swiper-slide class="banner-list swiper-slide" v-for="(bannerList, i) in bannerData" :key="i">
-                    <a href=""  v-for="(bannerItem, j) in bannerList" :key="j">
+                    <div 
+                    @click="go(bannerItem.name,bannerItem.entry_id)"
+                    v-for="(bannerItem, j) in bannerList" 
+                    :key="j">
                         <img :src="bannerItem.img" alt="" class="banner-img">
                         <span class="banner-title">{{bannerItem.name}}</span>
-                    </a>
+                    </div>
                 </swiper-slide>
                 <!-- Optional controls -->
                 <div class="swiper-pagination"  slot="pagination" v-show="bannerData.length>1"></div>
@@ -63,6 +66,10 @@ export default {
                     this.bannerData=data;
                 })  
             }  
+        },
+        //点击跳转
+        go(target_name,entry_id){
+            this.$router.push({ path: '/home/bannerlist',query: { target_name,entry_id}})
         }
     },
     mounted () {
@@ -93,7 +100,7 @@ export default {
     float: left;
     padding-bottom: 0.28rem;
 }
-.banner-list a{
+.banner-list div{
     width: 25%;
     text-align: center;
     height: 0.71rem;
