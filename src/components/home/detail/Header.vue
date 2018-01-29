@@ -1,6 +1,8 @@
 <template>
+<div>
+    <!-- :style="{background-image: bgimg}' -->
     <header class="detail-header-wrap">    
-        <div class="header-img"><img :src="sellerInfo.image_path" alt="" class="header-banner"></div>    
+        <div class="header-img" :style="{background: sellerInfo.image_path}"><img :src="sellerInfo.image_path_top" alt="" class="header-banner"></div>    
         <h3 class="seller-title">{{sellerInfo.name}}<i class="iconfont">&#xe600;</i></h3>
         <div class="seller-info">
             <span>{{sellerInfo.rating}}</span>
@@ -17,8 +19,10 @@
             </div>
         </div>
         <div class="red-packet"><span class="red-packet-active"><em>共<i>10</i>元专享红包</em><i>领取</i></span></div>
-        <active-all :active='sellerInfo.activities' v-if="showActive" @closeShow='closeShowActive'></active-all>
+        <!-- <active-all :active='sellerInfo.activities' v-if="showActive" @closeShow='closeShowActive'></active-all> -->
+        <i class="go-back iconfont" @click="$router.go(-1)">&#xe67c;</i>
     </header>
+</div>
 </template>
 
 <script>
@@ -53,17 +57,17 @@ export default {
     },
     methods: {
         showAllActive(){
-            this.showActive=true;
-        },
-        closeShowActive(){
-            this.showActive=false;
+            // this.showActive=true;
+            this.$emit('showAllActive')
+            this.$center.$emit('getActiveData',this.sellerInfo.activities)
         }
     },
     mounted () {
         //请求商家数据
         getSellerInfo(this.$route.query.id,this.lat,this.lon,this.extras).then((data)=>{
-            console.log(data)
-            this.sellerInfo=data
+            // console.log(data)
+            this.sellerInfo=data;
+            this.$center.$emit('SellerInfo',data)
         })
     },
 };
@@ -79,6 +83,7 @@ export default {
 .header-img{
     height: 0.65rem;
     position: relative;
+    background-size:cover;
 }
 .header-img:after{
     content: '';
@@ -173,5 +178,14 @@ export default {
 .red-packet-active i{
     display: inline-block;
     width: 0.35rem;
+}
+
+.go-back{
+    position: absolute;
+    display: block;
+    color: white;
+    font-size: 0.17rem;
+    top: 0.15rem;
+    left: 0.12rem;
 }
 </style>

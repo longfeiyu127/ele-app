@@ -1,6 +1,5 @@
 <template>
     <div id="seller-list">
-        <h3 class="title">推荐商家</h3>
         <ul class="seller-list clearfix">
             <li class="seller one-border-bottom" v-for="(seller,index)  in sellerData" :key="index" @click="goDetail(index)"> 
                 <img :src="seller.img" alt="" class="sellerImg">
@@ -43,7 +42,7 @@
 import Vuex from 'vuex'
 import {getSeller} from '../../../service/HomeService.js'
 export default {
-    name:'home-list',
+    name:'bannerList-list',
     data(){
         return{
             sellerData:[],
@@ -78,7 +77,15 @@ export default {
         //进入详情页面
         goDetail(index){
             this.$router.push({ path: '/home/detail',query: { id: this.sellerData[index].id }})
+        },
+        //修改数据
+        modifySellerData(data){
+            this.sellerData=data;
+            //修改完成
+            this.$emit('navListEnd')
         }
+        //加载更多数据
+
     },
     computed: {
         ...Vuex.mapState({
@@ -90,30 +97,8 @@ export default {
             return this.sellerData.length
         }
     },
-    watch:{
-        lon(){
-            if(this.flag){
-                this.sellerData=[];
-                this.flag=false;
-                this.requireData();
-            }      
-        },
-        lat(){
-            if(this.flag){
-                this.sellerData=[];
-                this.flag=false;
-                this.requireData();
-            }    
-        },
-    },
     mounted () { 
-        //首次加载
-        this.requireData()
-        //监听加载更多
-        this.$center.$on('get-more',()=>{
-            console.log('需要加载更多')
-            this.requireData()
-        })
+
     },
 };
 </script>

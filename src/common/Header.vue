@@ -1,7 +1,10 @@
 <template>
+<div>
     <div  :id="pageId" class="page-haeder">
         {{pageId}}
     </div>
+    <i class="go-back iconfont" @click="$router.go(-1)">&#xe67c;</i>
+</div>
 </template>
 
 <script>
@@ -32,6 +35,15 @@ export default {
     text-align: center;
     font-size: 0.16rem;
     font-weight: 800;
-    z-index: 5;
+    z-index: 8;
+}
+.go-back{
+    position: absolute;
+    display: block;
+    color: white;
+    font-size: 0.17rem;
+    top: 0.12rem;
+    left: 0.12rem;
+    z-index: 8;
 }
 </style>

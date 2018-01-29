@@ -13,4 +13,12 @@ export function handleImage(path,size){
     }
 }
 
+export function handleBgImage(path){
+    if(path){
+        let path2=path.replace(/!130x130r\/gravity\/Center\/crop\/130x130\/$/,'!40p/blur/50x40/');
+        return path.replace(/!130x130r\/gravity\/Center\/crop\/130x130\/$/,'!40p/blur/50x40/');
+    }else{
+        return ''
+    }
+}
 

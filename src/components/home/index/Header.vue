@@ -2,7 +2,11 @@
   <header class="header-wrap">
       <div class="header">
         <div>
-            <a href="" class="address">地址</a>
+            <router-link class="address" to="/home/location">
+                <i class="iconfont xia">&#xe609;</i>
+                <span class="address-txt">{{address}}</span>
+                <i class="iconfont dian">&#xe600;</i>
+            </router-link>
         </div>
       </div>
       <home-search class="search"></home-search>
@@ -10,12 +14,18 @@
 </template>
 
 <script>
+import Vuex from 'vuex'
 import Search from './Search'
 export default {
     name:'home-header',
     components:{
         [Search.name]:Search 
-    }
+    },
+    computed: {
+        ...Vuex.mapState({
+            address:'address'
+        })
+    },
 };
 </script>
 
@@ -33,10 +43,28 @@ export default {
     height: 0.42rem;
     display: block;
     font-size: 0.15rem;
+    line-height: 0.18rem;
     color: white;
     font-weight: 800;
     box-sizing: border-box;
     padding-left: 0.13rem;
-    padding-top: 0.18rem;
+    padding-top: 0.15rem;
+}
+.xia{
+    font-size: 0.18rem;
+}
+.address-txt{
+    display: inline-block;
+    max-width: 1.59rem;
+    padding: 0  0.06rem;
+    line-height: 0.18rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding-bottom: 0.03rem;
+}
+.dian{
+    font-size: 0.11rem;
 }
 </style>

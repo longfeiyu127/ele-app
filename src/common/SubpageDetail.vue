@@ -21,9 +21,9 @@ export default {
             probeType: 3
         });
         this.pageRefresh()
-        this.MyScroll.on('scrollStart',()=>{
-             this.pageRefresh()
-        })
+        // this.MyScroll.on('scrollStart',()=>{
+        //      this.pageRefresh()
+        // })
         this.MyScroll.on('scroll', ()=>{
             let y=this.MyScroll.y
             //传输给主页面滚动Y值 
@@ -31,9 +31,9 @@ export default {
             // console.log(y)
             if(y>0){
                  this.MyScroll.scrollTo(0, 0);
-            }else if(y<-265){
+            }else if(y<-241){
                 //需要加载更多
-                this.MyScroll.scrollTo(0, -265);
+                this.MyScroll.scrollTo(0, -241);
             }
         });
     }
